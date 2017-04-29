@@ -39,6 +39,10 @@ class MovieInformation: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func addMovie(_ sender: UIButton) {
+        
+    }
+    
 
     /*
     // MARK: - Navigation

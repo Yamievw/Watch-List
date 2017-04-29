@@ -22,15 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Movies" translatesAutoresizingMaskIntoConstraints="NO" id="gH6-Kc-O1j">
-                                <rect key="frame" x="0.0" y="69" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="4i9-tl-y4g"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Watchlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFy-cn-WSk">
-                                <rect key="frame" x="138" y="40" width="99" height="20"/>
+                                <rect key="frame" x="138" y="39" width="99" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="99" id="niO-fv-s77"/>
                                 </constraints>
@@ -45,9 +38,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Edit"/>
-                                <connections>
-                                    <segue destination="5pm-PF-kKz" kind="show" id="ztx-eJ-v9e"/>
-                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ipR-2q-mC4">
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
@@ -61,7 +51,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q3P-Df-2dN">
-                                                    <rect key="frame" x="8" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="8" y="0.0" width="100" height="99"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUx-RD-RF7">
                                                     <rect key="frame" x="116" y="8" width="34" height="21"/>
@@ -90,33 +80,38 @@
                                             <outlet property="moviePoster" destination="q3P-Df-2dN" id="Yfg-8y-iwP"/>
                                             <outlet property="movieTitle" destination="wUx-RD-RF7" id="QTJ-yu-URQ"/>
                                             <outlet property="movieYear" destination="U7v-6v-6IN" id="ybX-0Z-Owt"/>
+                                            <segue destination="5pm-PF-kKz" kind="show" identifier="showmovieinfo2" id="XfP-eA-5vC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-1M-WVz">
+                                <rect key="frame" x="277" y="71" width="84" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="CGz-dm-vfL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <state key="normal" title="Add movie"/>
+                                <connections>
+                                    <segue destination="kbV-wB-9wv" kind="show" identifier="addmovie" id="DcH-og-9SC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="centerX" secondItem="TPt-Gc-spO" secondAttribute="centerX" id="26A-lx-IZX"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="top" secondItem="aFy-cn-WSk" secondAttribute="bottom" constant="9" id="3zZ-w4-1jO"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="top" secondItem="aFy-cn-WSk" secondAttribute="bottom" constant="9" id="6dD-iI-uAv"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="top" secondItem="wOr-8J-Lq2" secondAttribute="bottom" constant="3" id="8n5-Dm-yun"/>
+                            <constraint firstAttribute="trailing" secondItem="zzf-1M-WVz" secondAttribute="trailing" constant="14" id="8Vf-hC-m8D"/>
                             <constraint firstAttribute="trailing" secondItem="wOr-8J-Lq2" secondAttribute="trailing" constant="14" id="Aiq-Zc-lYA"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="leading" secondItem="TPt-Gc-spO" secondAttribute="leading" id="Nbr-TA-7uk"/>
+                            <constraint firstItem="zzf-1M-WVz" firstAttribute="top" secondItem="wOr-8J-Lq2" secondAttribute="bottom" constant="5" id="Geb-Kl-9aA"/>
                             <constraint firstItem="aFy-cn-WSk" firstAttribute="centerX" secondItem="TPt-Gc-spO" secondAttribute="centerX" id="Pjr-0F-XKS"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="top" secondItem="wOr-8J-Lq2" secondAttribute="bottom" constant="3" id="T8P-9k-Sf3"/>
-                            <constraint firstItem="gH6-Kc-O1j" firstAttribute="leading" secondItem="TPt-Gc-spO" secondAttribute="leading" id="Vsg-H7-Et2"/>
-                            <constraint firstAttribute="trailing" secondItem="gH6-Kc-O1j" secondAttribute="trailing" id="XIZ-Cs-c7C"/>
-                            <constraint firstAttribute="trailing" secondItem="gH6-Kc-O1j" secondAttribute="trailing" id="c83-aQ-ZOc"/>
-                            <constraint firstItem="ipR-2q-mC4" firstAttribute="top" secondItem="gH6-Kc-O1j" secondAttribute="bottom" id="gWx-7k-PVB"/>
+                            <constraint firstItem="ipR-2q-mC4" firstAttribute="top" secondItem="aFy-cn-WSk" secondAttribute="bottom" constant="53" id="fKG-r4-lMX"/>
                             <constraint firstItem="XcD-I9-X4t" firstAttribute="top" secondItem="ipR-2q-mC4" secondAttribute="bottom" id="hlA-qB-IpM"/>
                             <constraint firstAttribute="trailing" secondItem="ipR-2q-mC4" secondAttribute="trailing" id="hwL-9i-82G"/>
                             <constraint firstItem="ipR-2q-mC4" firstAttribute="leading" secondItem="TPt-Gc-spO" secondAttribute="leading" id="kOj-Kx-UVN"/>
                             <constraint firstItem="ipR-2q-mC4" firstAttribute="top" secondItem="X5y-al-535" secondAttribute="bottom" constant="93" id="kdO-gi-KsJ"/>
+                            <constraint firstItem="ipR-2q-mC4" firstAttribute="top" secondItem="zzf-1M-WVz" secondAttribute="bottom" constant="9" id="u7B-p4-X5m"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchMovies" destination="gH6-Kc-O1j" id="A5r-dr-m7T"/>
                         <outlet property="watchList" destination="ipR-2q-mC4" id="xHH-3f-cGD"/>
                     </connections>
                 </viewController>
@@ -153,7 +148,7 @@
                                         <rect key="frame" x="0.0" y="323.5" width="375" height="323.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGX-Mz-xyX">
-                                                <rect key="frame" x="170" y="8" width="34" height="20.5"/>
+                                                <rect key="frame" x="170" y="8.5" width="34" height="20.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="MJL-pP-6o3"/>
                                                 </constraints>
@@ -162,14 +157,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAb-mW-cfm">
-                                                <rect key="frame" x="0.0" y="53" width="375" height="225"/>
+                                                <rect key="frame" x="0.0" y="53" width="375" height="225.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBB-hw-hGw">
-                                                <rect key="frame" x="170" y="30" width="34" height="20.5"/>
+                                                <rect key="frame" x="170" y="31" width="34" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="kuT-3c-B91"/>
                                                 </constraints>
@@ -178,7 +173,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spu-lc-Diw">
-                                                <rect key="frame" x="123" y="282" width="129" height="33"/>
+                                                <rect key="frame" x="123" y="282.5" width="129" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="129" id="R70-NU-igV"/>
                                                 </constraints>
@@ -224,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCx-YQ-4H2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1516" y="136.28185907046478"/>
+            <point key="canvasLocation" x="2591" y="134"/>
         </scene>
         <!--Search Movies-->
         <scene sceneID="QSF-ND-Wws">
@@ -256,6 +251,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="5pm-PF-kKz" kind="show" identifier="showmovieinfo1" id="eSp-hG-uDa"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -287,12 +285,16 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchMovies" destination="SzT-CK-Dmf" id="XP5-SF-bQp"/>
+                        <outlet property="movieList" destination="1B4-BW-dUF" id="5Db-wT-vmc"/>
+                        <outlet property="searchBar" destination="SzT-CK-Dmf" id="SQ3-vA-mTm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nn-C8-QBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2197.5999999999999" y="135.38230884557723"/>
+            <point key="canvasLocation" x="1716" y="137"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XfP-eA-5vC"/>
+    </inferredMetricsTieBreakers>
 </document>

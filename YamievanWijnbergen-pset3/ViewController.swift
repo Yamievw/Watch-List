@@ -15,14 +15,13 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     var results = [] as! [[String : Any]]
     
-    @IBOutlet weak var searchMovies: UISearchBar!
     @IBOutlet weak var watchList: UITableView!
-    
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // When user inputs searchitem, search it, disable keyboard and make searchbar empty
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchMovieInfo(search: searchMovies.text!)
+        let searchmovie = searchBar.text!.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)
+        searchMovieInfo(search: searchmovie)
         view.endEditing(true)
         searchBar.text = ""
     }
@@ -42,11 +41,15 @@ class ViewController: UIViewController, UITableViewDelegate {
             }
             
             let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-            self.results = [json["Search"] as! [String : Any]]
-            print(self.results)
-            
-            DispatchQueue.main.async {
-                self.watchList.reloadData()
+            if json["Search"] != nil{
+                let searchResults = [json["Search"] as! [String : Any]]
+                self.results = searchResults
+                
+                DispatchQueue.main.async {
+                    self.watchList.reloadData()
+                }
+
+                
             }
         }
         task.resume()
@@ -75,43 +78,69 @@ class ViewController: UIViewController, UITableViewDelegate {
         return cell
     }
 
-    // Segue to movieInformation when clicking on cell
+    // Segue to SearchMovies when clicking on addmovie button
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? MovieInformation {
-
-            let string = self.searchMovies.text
-            let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
-            print(url)
-            
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else {
-                    return
-                }
+        if segue.identifier == "addmovie" {
+            if let viewController = segue.destination as? SearchMovies {
                 
-                let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-                let results = json as! [String : Any]
-                print(results)
+                let url = URL(string: "https://omdbapi.com/?t=" + "&plot=full")!
+                print(url)
                 
-                DispatchQueue.main.async {
-                    if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
-                        viewController.moviePoster = UIImage(data: data as Data)
+                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    guard let data = data else {
+                        return
                     }
                     
-                    viewController.movieTitle = results["Title"] as! String?
-                    viewController.movieYear = results["Year"] as! String?
-                    viewController.movieDescription = results["Description"] as! String?
+                    let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
+                    let results = json as! [String : Any]
+                    print(results)
                     
-                    viewController.update()
+                    DispatchQueue.main.async {
+                        if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
+                            viewController.moviePoster = UIImage(data: data as Data)
+                        }
+                        
+                        viewController.movieTitle = results["Title"] as! String?
+                        viewController.movieYear = results["Year"] as! String?
+                        
+                        //viewController.update()
+                    }
                 }
+                task.resume()
             }
-            task.resume()
+        }
+    // segue to MovieInfo when clicking on cell
+    else if segue.identifier == "showmovieinfo2" {
+    if let viewController = segue.destination as? MovieInformation {
+        
+        let string = self.searchBar.text
+        let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
+        print(url)
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
+            let results = json as! [String : Any]
+            print(results)
+            
+            DispatchQueue.main.async {
+                if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
+                    viewController.moviePoster = UIImage(data: data as Data)
+                }
+                
+                viewController.movieTitle = results["Title"] as! String
+                viewController.movieYear = results["Year"] as! String
+            }
+        }
+        
+        task.resume()
+            }
         }
     }
-    
 
-    
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
