@@ -81,31 +81,6 @@ class ViewController: UIViewController, UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addmovie" {
             if let viewController = segue.destination as? SearchMovies {
-//                
-//                let url = URL(string: "https://omdbapi.com/?s=" + "&plot=full")!
-//                print(url)
-//                
-//                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//                    guard let data = data else {
-//                        return
-//                    }
-//                    
-//                    let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-//                    let results = json as! [String : Any]
-//                    print(results)
-//                    
-//                    DispatchQueue.main.async {
-//                        if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
-//                            viewController.moviePoster = UIImage(data: data as Data)
-////                        }
-////                        
-//                        viewController.movieTitle = results["Title"] as! String?
-//                        viewController.movieYear = results["Year"] as! String?
-//                        
-//                        //viewController.update()
-//                    }
-//                }
-//                task.resume()
             }
         }
             
@@ -139,6 +114,11 @@ class ViewController: UIViewController, UITableViewDelegate {
         task.resume()
             }
         }
+    }
+    
+    func deleteCell() {
+        
+        
     }
 
     override func viewDidLoad() {

@@ -14,6 +14,7 @@ class MovieInformation: UIViewController {
     var movieTitle: String?
     var movieYear: String?
     var movieDescription: String?
+    var imdbID: String?
     
 
     @IBOutlet weak var posterImage: UIImageView!
@@ -24,9 +25,38 @@ class MovieInformation: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.movieInfo()
+        self.update()
+        
     }
     
+    func movieInfo() {
+    let string = self.imdbID
+    let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
+    
+    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        guard let data = data else {
+            return
+        }
+        
+        let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
+        let searchResults = json as! [String : Any]
+        print(searchResults)
+        
+        DispatchQueue.main.async {
+            if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
+                self.moviePoster = UIImage(data: data as Data)
+            }
+            
+            self.imdbID = searchResults["ImdbID"] as! String?
+            self.movieTitle = searchResults["Title"] as! String?
+            self.movieYear = searchResults["Year"] as! String?
+            self.movieDescription = searchResults["Description"] as! String?
+        }
+    }
+    task.resume()
+    }
+
     func update() {
         posterImage.image = moviePoster
         titleLabel.text = movieTitle
@@ -34,19 +64,16 @@ class MovieInformation: UIViewController {
         descriptionText.text = movieDescription
     }
     
+//    @IBAction func addToWatchlist(_ sender: Any) {
+//        
+//    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func addMovie(_ sender: UIButton) {
-        
-    }
-    
 
-
-    
 
     /*
     // MARK: - Navigation

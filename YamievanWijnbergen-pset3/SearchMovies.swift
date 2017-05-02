@@ -8,16 +8,22 @@
 
 import UIKit
 
-class SearchMovies: UIViewController, UISearchBarDelegate {
+class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     var moviePoster: UIImage?
     var movieTitle: String?
     var movieYear: String?
     
     var results = [] as! [[String:Any]]
+
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieList: UITableView!
+    
+    
+    @IBOutlet weak var moviePosters: UIImageView!
+    @IBOutlet weak var movieYears: UILabel!
+    @IBOutlet weak var movieTitles: UILabel!
     
     // When user inputs searchitem, search it, disable keyboard and make searchbar empty
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -25,7 +31,6 @@ class SearchMovies: UIViewController, UISearchBarDelegate {
         searchMovieInfo(search: searchmovie)
         view.endEditing(true)
     }
-    
     
     // insert OMDB API to get database of movies
     func searchMovieInfo(search: String){
@@ -48,8 +53,6 @@ class SearchMovies: UIViewController, UISearchBarDelegate {
                 DispatchQueue.main.async {
                     self.movieList.reloadData()
                 }
-                
-                
             }
         }
         task.resume()
@@ -61,14 +64,16 @@ class SearchMovies: UIViewController, UISearchBarDelegate {
     }
     
     // create new cell
-    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as! MovieCell
         
         // for each cell in tableview, display title, year and poster
-        print(self.results)
-        cell.movieTitle.text = self.results[indexPath.row]["Title"] as! String?
+        print(self.results[indexPath.row])
+        cell.movieTitle.text = self.results[indexPath.row]["Title"] as! String!
         cell.movieYear.text = self.results[indexPath.row]["Year"] as! String!
+        
+        cell.imdbID = self.results[indexPath.row]["imdbID"] as! String?
         
         // get movieposter
         let link = NSURL(string: self.results[indexPath.row]["Poster"] as! String)
@@ -77,39 +82,38 @@ class SearchMovies: UIViewController, UISearchBarDelegate {
         }
         return cell
     }
-    
+
     // Segue to MovieInformation when clicking on cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? SearchMovies {
+        let path = self.movieList.indexPathForSelectedRow
+        let cell = movieList.cellForRow(at: path!) as? MovieCell
+        if let viewController = segue.destination as? MovieInformation {
             
-            let string = self.searchBar.text
-            let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
-            print(url)
-            
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else {
-                    return
-                }
-                
-                let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-                let searchResults = json as! [String : Any]
-                print(searchResults)
-                
-                DispatchQueue.main.async {
-                    if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
-                        viewController.moviePoster = UIImage(data: data as Data)
-                    }
-                    
-                    viewController.movieTitle = searchResults["Title"] as! String?
-                    viewController.movieYear = searchResults["Year"] as! String?
-                    
-                    //viewController.update()
-                }
-            }
-            task.resume()
+            viewController.imdbID = cell?.imdbID
+
+//            let string = self.searchBar.text
+//            let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
+//            print(url)
+//            
+//            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+//                guard let data = data else {
+//                    return
+//                }
+//                
+//                let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
+//                let searchResults = json as! [String : Any]
+//                print(searchResults)
+//                
+//                DispatchQueue.main.async {
+//                    if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
+//                        viewController.moviePoster = UIImage(data: data as Data)
+//                    }
+//                    
+//                }
+//            }
+//            task.resume()
         }
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

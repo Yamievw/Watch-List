@@ -43,42 +43,46 @@
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="N2q-Js-0TI" customClass="MovieCell" customModule="YamievanWijnbergen_pset3" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="N2q-Js-0TI" customClass="MovieCell" customModule="YamievanWijnbergen_pset3" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N2q-Js-0TI" id="kV0-r8-PgD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="N2q-Js-0TI" id="kV0-r8-PgD">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q3P-Df-2dN">
                                                     <rect key="frame" x="8" y="0.0" width="100" height="99"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUx-RD-RF7">
-                                                    <rect key="frame" x="116" y="8" width="34" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7v-6v-6IN">
-                                                    <rect key="frame" x="116" y="40" width="34" height="21"/>
+                                                    <rect key="frame" x="117" y="61" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Title" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c29-qz-XaS">
+                                                    <rect key="frame" x="112" y="8" width="255" height="45"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="255" id="0Xw-Ie-v8L"/>
+                                                        <constraint firstAttribute="height" constant="45" id="itV-iN-e0K"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wUx-RD-RF7" firstAttribute="top" secondItem="kV0-r8-PgD" secondAttribute="topMargin" id="A0O-P9-N86"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="c29-qz-XaS" secondAttribute="trailing" constant="204" id="7dS-ba-CIw"/>
                                                 <constraint firstItem="q3P-Df-2dN" firstAttribute="top" secondItem="kV0-r8-PgD" secondAttribute="top" id="JLk-rX-B7n"/>
                                                 <constraint firstAttribute="bottom" secondItem="q3P-Df-2dN" secondAttribute="bottom" id="TwD-N4-7Q8"/>
-                                                <constraint firstItem="U7v-6v-6IN" firstAttribute="top" secondItem="wUx-RD-RF7" secondAttribute="bottom" constant="11" id="a9P-3T-X8G"/>
-                                                <constraint firstItem="wUx-RD-RF7" firstAttribute="leading" secondItem="q3P-Df-2dN" secondAttribute="trailing" constant="8" id="nuJ-27-Xge"/>
+                                                <constraint firstItem="c29-qz-XaS" firstAttribute="top" secondItem="kV0-r8-PgD" secondAttribute="topMargin" id="Uqf-wU-jy9"/>
+                                                <constraint firstItem="U7v-6v-6IN" firstAttribute="top" secondItem="c29-qz-XaS" secondAttribute="bottom" constant="8" id="WAI-xH-Uib"/>
                                                 <constraint firstItem="U7v-6v-6IN" firstAttribute="leading" secondItem="q3P-Df-2dN" secondAttribute="trailing" constant="8" id="onq-qF-luc"/>
+                                                <constraint firstItem="c29-qz-XaS" firstAttribute="leading" secondItem="q3P-Df-2dN" secondAttribute="trailing" constant="4" id="wQW-Uc-GZe"/>
                                                 <constraint firstItem="q3P-Df-2dN" firstAttribute="leading" secondItem="kV0-r8-PgD" secondAttribute="leading" constant="8" id="zWk-pO-1z6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="moviePoster" destination="q3P-Df-2dN" id="Yfg-8y-iwP"/>
-                                            <outlet property="movieTitle" destination="wUx-RD-RF7" id="QTJ-yu-URQ"/>
                                             <outlet property="movieYear" destination="U7v-6v-6IN" id="ybX-0Z-Owt"/>
                                             <segue destination="5pm-PF-kKz" kind="show" identifier="showmovieinfo2" id="XfP-eA-5vC"/>
                                         </connections>
@@ -179,6 +183,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                                 <state key="normal" title="Add to Watchlist"/>
+                                                <connections>
+                                                    <action selector="addToWatchlist:" destination="5pm-PF-kKz" eventType="touchUpInside" id="pD8-f2-51G"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.91398154149999999" green="0.91398154149999999" blue="0.91398154149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -247,18 +254,57 @@
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lcs-so-GCR" customClass="MovieCell" customModule="YamievanWijnbergen_pset3" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="ASS-Pb-toy" customClass="MovieCell" customModule="YamievanWijnbergen_pset3" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lcs-so-GCR" id="f8z-UV-Eiu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ASS-Pb-toy" id="IWB-fC-RE0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OUY-VK-E49">
+                                                    <rect key="frame" x="8" y="0.0" width="100" height="99"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="pqG-mc-Nf8"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Title" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kIv-c8-K4d">
+                                                    <rect key="frame" x="112" y="8" width="263" height="44"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpT-Zm-4Ih">
+                                                    <rect key="frame" x="116" y="62" width="32" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="OUY-VK-E49" secondAttribute="bottom" id="3Ye-av-IG3"/>
+                                                <constraint firstItem="OUY-VK-E49" firstAttribute="top" secondItem="IWB-fC-RE0" secondAttribute="top" id="8s8-QV-BwQ"/>
+                                                <constraint firstItem="kIv-c8-K4d" firstAttribute="top" secondItem="IWB-fC-RE0" secondAttribute="topMargin" id="9Ha-ct-NvP"/>
+                                                <constraint firstItem="OUY-VK-E49" firstAttribute="leading" secondItem="IWB-fC-RE0" secondAttribute="leading" constant="8" id="CkP-qH-I0c"/>
+                                                <constraint firstItem="ZpT-Zm-4Ih" firstAttribute="leading" secondItem="OUY-VK-E49" secondAttribute="trailing" constant="8" id="P2N-cw-PHQ"/>
+                                                <constraint firstItem="ZpT-Zm-4Ih" firstAttribute="top" secondItem="kIv-c8-K4d" secondAttribute="bottom" constant="9.5" id="Zlo-ev-bAQ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZpT-Zm-4Ih" secondAttribute="bottom" constant="8.5" id="kvA-9B-XqC"/>
+                                                <constraint firstAttribute="trailing" secondItem="kIv-c8-K4d" secondAttribute="trailing" id="n6G-yc-JnZ"/>
+                                                <constraint firstItem="kIv-c8-K4d" firstAttribute="leading" secondItem="OUY-VK-E49" secondAttribute="trailing" constant="4" id="yOo-WY-8H3"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="5pm-PF-kKz" kind="show" identifier="showmovieinfo1" id="eSp-hG-uDa"/>
+                                            <outlet property="moviePoster" destination="OUY-VK-E49" id="ErF-fV-90s"/>
+                                            <outlet property="movieTitle" destination="kIv-c8-K4d" id="fQg-Oz-1oj"/>
+                                            <outlet property="movieYear" destination="ZpT-Zm-4Ih" id="13f-Av-W38"/>
+                                            <segue destination="5pm-PF-kKz" kind="show" id="3y9-KS-T7p"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kbV-wB-9wv" id="O2h-Vx-kKz"/>
+                                    <outlet property="delegate" destination="kbV-wB-9wv" id="oht-13-nQ4"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWu-0d-gLl">
                                 <rect key="frame" x="161" y="39" width="53" height="21"/>
@@ -294,10 +340,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nn-C8-QBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716" y="137"/>
+            <point key="canvasLocation" x="1716" y="136.28185907046478"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eSp-hG-uDa"/>
+        <segue reference="3y9-KS-T7p"/>
     </inferredMetricsTieBreakers>
 </document>
