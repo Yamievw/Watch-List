@@ -33,6 +33,7 @@ class MovieInformation: UIViewController {
         yearLabel.text = movieYear
         descriptionText.text = movieDescription
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,6 +43,9 @@ class MovieInformation: UIViewController {
     @IBAction func addMovie(_ sender: UIButton) {
         
     }
+    
+
+
     
 
     /*

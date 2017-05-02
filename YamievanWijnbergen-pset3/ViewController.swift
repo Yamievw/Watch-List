@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDelegate {
     var results = [] as! [[String : Any]]
     
     @IBOutlet weak var watchList: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     // When user inputs searchitem, search it, disable keyboard and make searchbar empty
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -82,40 +81,41 @@ class ViewController: UIViewController, UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addmovie" {
             if let viewController = segue.destination as? SearchMovies {
-                
-                let url = URL(string: "https://omdbapi.com/?t=" + "&plot=full")!
-                print(url)
-                
-                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    guard let data = data else {
-                        return
-                    }
-                    
-                    let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-                    let results = json as! [String : Any]
-                    print(results)
-                    
-                    DispatchQueue.main.async {
-                        if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
-                            viewController.moviePoster = UIImage(data: data as Data)
-                        }
-                        
-                        viewController.movieTitle = results["Title"] as! String?
-                        viewController.movieYear = results["Year"] as! String?
-                        
-                        //viewController.update()
-                    }
-                }
-                task.resume()
+//                
+//                let url = URL(string: "https://omdbapi.com/?s=" + "&plot=full")!
+//                print(url)
+//                
+//                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+//                    guard let data = data else {
+//                        return
+//                    }
+//                    
+//                    let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
+//                    let results = json as! [String : Any]
+//                    print(results)
+//                    
+//                    DispatchQueue.main.async {
+//                        if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
+//                            viewController.moviePoster = UIImage(data: data as Data)
+////                        }
+////                        
+//                        viewController.movieTitle = results["Title"] as! String?
+//                        viewController.movieYear = results["Year"] as! String?
+//                        
+//                        //viewController.update()
+//                    }
+//                }
+//                task.resume()
             }
         }
+            
     // segue to MovieInfo when clicking on cell
     else if segue.identifier == "showmovieinfo2" {
     if let viewController = segue.destination as? MovieInformation {
         
-        let string = self.searchBar.text
-        let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
+        let url = URL(string: "https://omdbapi.com/?t=" + "&plot=full")!
         print(url)
+
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {

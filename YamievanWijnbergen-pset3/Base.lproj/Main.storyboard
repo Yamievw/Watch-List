@@ -239,6 +239,9 @@
                                     <constraint firstAttribute="width" constant="375" id="Nts-uQ-xSs"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kbV-wB-9wv" id="fmv-YP-Z6h"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1B4-BW-dUF">
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
@@ -295,6 +298,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XfP-eA-5vC"/>
+        <segue reference="eSp-hG-uDa"/>
     </inferredMetricsTieBreakers>
 </document>

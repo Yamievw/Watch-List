@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchMovies: UIViewController {
+class SearchMovies: UIViewController, UISearchBarDelegate {
 
     var moviePoster: UIImage?
     var movieTitle: String?
@@ -24,7 +24,6 @@ class SearchMovies: UIViewController {
         let searchmovie = searchBar.text!.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)
         searchMovieInfo(search: searchmovie)
         view.endEditing(true)
-        searchBar.text = ""
     }
     
     
@@ -45,7 +44,7 @@ class SearchMovies: UIViewController {
             if json["Search"] != nil{
                 let searchResults = json["Search"] as! [[String : Any]]
                 self.results = searchResults
-                
+
                 DispatchQueue.main.async {
                     self.movieList.reloadData()
                 }
