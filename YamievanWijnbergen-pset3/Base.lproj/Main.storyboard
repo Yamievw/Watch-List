@@ -297,7 +297,7 @@
                                             <outlet property="moviePoster" destination="OUY-VK-E49" id="ErF-fV-90s"/>
                                             <outlet property="movieTitle" destination="kIv-c8-K4d" id="fQg-Oz-1oj"/>
                                             <outlet property="movieYear" destination="ZpT-Zm-4Ih" id="13f-Av-W38"/>
-                                            <segue destination="5pm-PF-kKz" kind="show" id="3y9-KS-T7p"/>
+                                            <segue destination="5pm-PF-kKz" kind="show" identifier="showmovieinfo1" id="3y9-KS-T7p"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

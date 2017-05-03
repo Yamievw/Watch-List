@@ -25,29 +25,32 @@ class MovieInformation: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.movieInfo()
+       self.movieInfo()
         self.update()
         
     }
     
     func movieInfo() {
-    let string = self.imdbID
-    let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
     
+
+    let url = URL(string: "https://omdbapi.com/?i=" + imdbID! + "&plot=full")!
+    print(url)
+
+
     let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
         guard let data = data else {
             return
         }
-        
+
         let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
         let searchResults = json as! [String : Any]
         print(searchResults)
-        
+
         DispatchQueue.main.async {
             if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
                 self.moviePoster = UIImage(data: data as Data)
             }
-            
+
             self.imdbID = searchResults["ImdbID"] as! String?
             self.movieTitle = searchResults["Title"] as! String?
             self.movieYear = searchResults["Year"] as! String?

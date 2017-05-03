@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate {
     
     // save movies in watchlist
-    let watchlist = UserDefaults.standard
+    let watchlists = UserDefaults.standard
     
     var results = [] as! [[String : Any]]
     
@@ -84,34 +84,13 @@ class ViewController: UIViewController, UITableViewDelegate {
             }
         }
             
-    // segue to MovieInfo when clicking on cell
-    else if segue.identifier == "showmovieinfo2" {
-    if let viewController = segue.destination as? MovieInformation {
-        
-        let url = URL(string: "https://omdbapi.com/?t=" + "&plot=full")!
-        print(url)
-
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                return
-            }
-            
-            let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-            let results = json as! [String : Any]
-            print(results)
-            
-            DispatchQueue.main.async {
-                if let data = NSData(contentsOf: NSURL(string: results["Poster"] as! String) as! URL) {
-                    viewController.moviePoster = UIImage(data: data as Data)
-                }
+        // Segue to MovieInformation when clicking on cell
+        else if segue.identifier == "showmovieinfo1" {
+            let path = self.watchList.indexPathForSelectedRow
+            let cell = watchList.cellForRow(at: path!) as? MovieCell
+            if let viewController = segue.destination as? MovieInformation {
                 
-                viewController.movieTitle = results["Title"] as! String
-                viewController.movieYear = results["Year"] as! String
-            }
-        }
-        
-        task.resume()
+                viewController.imdbID = cell?.imdbID
             }
         }
     }
