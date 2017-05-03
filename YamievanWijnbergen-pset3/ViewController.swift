@@ -10,20 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate {
     
-    // save movies in watchlist
-    let watchlists = UserDefaults.standard
-    
     var results = [] as! [[String : Any]]
+    var watchlist = [[String]]()
     
     @IBOutlet weak var watchList: UITableView!
-    
-    // When user inputs searchitem, search it, disable keyboard and make searchbar empty
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchmovie = searchBar.text!.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)
-        searchMovieInfo(search: searchmovie)
-        view.endEditing(true)
-        searchBar.text = ""
-    }
     
     
     // insert OMDB API to get database of movies
@@ -32,7 +22,6 @@ class ViewController: UIViewController, UITableViewDelegate {
         let search = search
         let request = String("https://omdbapi.com/?s=" + search)
         let url = URL(string: request!)
-        
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             guard let data = data else {
@@ -47,8 +36,6 @@ class ViewController: UIViewController, UITableViewDelegate {
                 DispatchQueue.main.async {
                     self.watchList.reloadData()
                 }
-
-                
             }
         }
         task.resume()
@@ -56,7 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 
     // set number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
+        return watchlist.count
     }
     
     // create new cell
@@ -65,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             as! MovieCell
         
         // for each cell in tableview, display title, year and poster
-        print(self.results)
+        print(watchlist)
         cell.movieTitle.text = self.results[indexPath.row]["Title"] as! String?
         cell.movieYear.text = self.results[indexPath.row]["Year"] as! String!
         
@@ -91,13 +78,12 @@ class ViewController: UIViewController, UITableViewDelegate {
             if let viewController = segue.destination as? MovieInformation {
                 
                 viewController.imdbID = cell?.imdbID
+                
+//                if viewController.watchlist.contains(where: {$0[0] == viewController.movieTitle}) == true {
+//                    viewController.addMovie.setTitle("Remove from Watchlist",for: .normal)
+//                }
             }
         }
-    }
-    
-    func deleteCell() {
-        
-        
     }
 
     override func viewDidLoad() {

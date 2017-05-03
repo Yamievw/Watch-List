@@ -20,10 +20,10 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieList: UITableView!
     
-    
-    @IBOutlet weak var moviePosters: UIImageView!
-    @IBOutlet weak var movieYears: UILabel!
-    @IBOutlet weak var movieTitles: UILabel!
+//    
+//    @IBOutlet weak var moviePosters: UIImageView!
+//    @IBOutlet weak var movieYears: UILabel!
+//    @IBOutlet weak var movieTitles: UILabel!
     
     // When user inputs searchitem, search it, disable keyboard and make searchbar empty
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -90,28 +90,10 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
         if let viewController = segue.destination as? MovieInformation {
             
             viewController.imdbID = cell?.imdbID
-
-//            let string = self.searchBar.text
-//            let url = URL(string: "https://omdbapi.com/?t=" + string! + "&plot=full")!
-//            print(url)
-//            
-//            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//                guard let data = data else {
-//                    return
-//                }
-//                
-//                let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-//                let searchResults = json as! [String : Any]
-//                print(searchResults)
-//                
-//                DispatchQueue.main.async {
-//                    if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
-//                        viewController.moviePoster = UIImage(data: data as Data)
-//                    }
-//                    
-//                }
+            
+//            if viewController.watchlist.contains(where: {$0[0] == viewController.movieTitle}) == true {
+//                viewController.addMovie.setTitle("Remove from Watchlist",for: .normal)
 //            }
-//            task.resume()
         }
     }
 

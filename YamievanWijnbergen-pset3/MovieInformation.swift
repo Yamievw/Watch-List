@@ -10,6 +10,8 @@ import UIKit
 
 class MovieInformation: UIViewController {
     
+    var watchlist = (UserDefaults.standard.array(forKey: "Movies") as? [[String]]) ?? []
+    
     var moviePoster: UIImage?
     var movieTitle: String?
     var movieYear: String?
@@ -18,16 +20,18 @@ class MovieInformation: UIViewController {
     
 
     @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var descriptionText: UITextView!
+    
+    @IBOutlet weak var addMovie: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.movieInfo()
-        self.update()
         
+        self.update()
+        self.movieInfo()
     }
     
     func movieInfo() {
@@ -67,16 +71,36 @@ class MovieInformation: UIViewController {
         descriptionText.text = movieDescription
     }
     
-//    @IBAction func addToWatchlist(_ sender: Any) {
-//        
-//    }
-    
+    @IBAction func addToWatchlist(_ sender: Any) {
+
+        // append movie to watchlist, if added change text to remove intead of add
+        let index = watchlist.index(where: {$0[0] == self.movieTitle!})
+        if index == nil {
+            self.watchlist.append([self.movieTitle!])
+            UserDefaults.standard.set(watchlist, forKey: "Movies")
+            self.addMovie.setTitle("Remove from Watchlist",for: .normal)
+            reloadInputViews()
+            print(watchlist)
+        }
+        // if movie already is in watchlist, on click add button: remove movie
+        else {
+            self.watchlist.remove(at: index!)
+            UserDefaults.standard.set(watchlist, forKey: "Movies")
+            self.addMovie.setTitle("Add to Watchlist",for: .normal)
+            print(watchlist)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ViewController {
+            viewController.watchlist = self.watchlist
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
     /*
     // MARK: - Navigation
