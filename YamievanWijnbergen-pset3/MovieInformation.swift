@@ -25,16 +25,46 @@ class MovieInformation: UIViewController {
         self.update()
     }
 
+    // insert OMDB API to get database of movies
+    func searchMovieInfo(search: String){
+        
+        let search = search
+        let request = String("https://omdbapi.com/?i=" + search)
+        let url = URL(string: request!)
+        
+        
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+            print(json)
+            if json["Plot"] != nil{
+                DispatchQueue.main.async {
+                    self.descriptionText.text = json["Plot"]! as! String
+
+
+                }
+            }
+        }
+        task.resume()
+
+    }
+
     func update() {
+        searchMovieInfo(search: (self.movie?["imdbID"])!)
+        
         self.titleLabel.text = self.movie?["Title"]
         self.yearLabel.text = self.movie?["Year"]
-        self.descriptionText.text = self.movie?["Plot"]
+//        self.descriptionText.text = self.plot
         
         // get movieposter
         let link = NSURL(string: self.movie?["Poster"] as! String)
         if let data = NSData(contentsOf: link as! URL) {
             self.posterImage.image = UIImage(data: data as Data)
         }
+        print(movie)
     }
     
     @IBAction func addToWatchlist(_ sender: Any) {

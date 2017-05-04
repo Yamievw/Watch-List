@@ -9,21 +9,12 @@
 import UIKit
 
 class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
-//
-//    var moviePoster: UIImage?
-//    var movieTitle: String?
-//    var movieYear: String?
-//    
+   
     var results = [] as! [[String:Any]]
 
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieList: UITableView!
-    
-//    
-//    @IBOutlet weak var moviePosters: UIImageView!
-//    @IBOutlet weak var movieYears: UILabel!
-//    @IBOutlet weak var movieTitles: UILabel!
     
     // When user inputs searchitem, search it, disable keyboard and make searchbar empty
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -36,7 +27,7 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
     func searchMovieInfo(search: String){
         
         let search = search
-        let request = String("https://omdbapi.com/?s=" + search)
+        let request = String("https://omdbapi.com/?s=" + search )
         let url = URL(string: request!)
         
         
@@ -46,9 +37,12 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
             }
             
             let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+            print(json)
             if json["Search"] != nil{
                 let searchResults = json["Search"] as! [[String : Any]]
+//                print(searchResults)
                 self.results = searchResults
+//                print(self.results)
 
                 DispatchQueue.main.async {
                     self.movieList.reloadData()
@@ -74,6 +68,7 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
         cell.movieYear.text = self.results[indexPath.row]["Year"] as! String!
         
         cell.imdbID = self.results[indexPath.row]["imdbID"] as! String?
+        cell.moviePlot = self.results[indexPath.row]["Plot"] as! String?
         
         // get movieposter
         let link = NSURL(string: self.results[indexPath.row]["Poster"] as! String)

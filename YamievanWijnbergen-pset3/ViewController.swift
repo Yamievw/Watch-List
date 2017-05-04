@@ -13,32 +13,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var results = UserDefaults.standard.array(forKey: "Movies") as? [[String : String]] ?? []
     
     @IBOutlet weak var watchList: UITableView!
-    
-    
-    // insert OMDB API to get database of movies
-//    func searchMovieInfo(search: String){
-//        
-//        let search = search
-//        let request = String("https://omdbapi.com/?s=" + search)
-//        let url = URL(string: request!)
-//        
-//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//            guard let data = data else {
-//                return
-//            }
-//            
-//            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-//            if json["Search"] != nil{
-//                let searchResults = [json["Search"] as! [String : Any]]
-//                self.results = searchResults
-//                
-//                DispatchQueue.main.async {
-//                    self.watchList.reloadData()
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
 
     // set number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

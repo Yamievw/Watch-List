@@ -16,6 +16,7 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var movieYear: UILabel!
     
     var imdbID: String?
+    var moviePlot: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
