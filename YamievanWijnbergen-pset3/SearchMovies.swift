@@ -9,11 +9,11 @@
 import UIKit
 
 class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
-
-    var moviePoster: UIImage?
-    var movieTitle: String?
-    var movieYear: String?
-    
+//
+//    var moviePoster: UIImage?
+//    var movieTitle: String?
+//    var movieYear: String?
+//    
     var results = [] as! [[String:Any]]
 
     
@@ -89,11 +89,8 @@ class SearchMovies: UIViewController, UISearchBarDelegate, UITableViewDataSource
         let cell = movieList.cellForRow(at: path!) as? MovieCell
         if let viewController = segue.destination as? MovieInformation {
             
-            viewController.imdbID = cell?.imdbID
-            
-//            if viewController.watchlist.contains(where: {$0[0] == viewController.movieTitle}) == true {
-//                viewController.addMovie.setTitle("Remove from Watchlist",for: .normal)
-//            }
+            viewController.movie = self.results[path!.row] as? [String : String]
+
         }
     }
 

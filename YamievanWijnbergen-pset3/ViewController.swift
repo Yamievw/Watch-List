@@ -8,51 +8,49 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var results = [] as! [[String : Any]]
-    var watchlist = [[String]]()
+    var results = UserDefaults.standard.array(forKey: "Movies") as? [[String : String]] ?? []
     
     @IBOutlet weak var watchList: UITableView!
     
     
     // insert OMDB API to get database of movies
-    func searchMovieInfo(search: String){
-        
-        let search = search
-        let request = String("https://omdbapi.com/?s=" + search)
-        let url = URL(string: request!)
-        
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            guard let data = data else {
-                return
-            }
-            
-            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-            if json["Search"] != nil{
-                let searchResults = [json["Search"] as! [String : Any]]
-                self.results = searchResults
-                
-                DispatchQueue.main.async {
-                    self.watchList.reloadData()
-                }
-            }
-        }
-        task.resume()
-    }
+//    func searchMovieInfo(search: String){
+//        
+//        let search = search
+//        let request = String("https://omdbapi.com/?s=" + search)
+//        let url = URL(string: request!)
+//        
+//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+//            guard let data = data else {
+//                return
+//            }
+//            
+//            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+//            if json["Search"] != nil{
+//                let searchResults = [json["Search"] as! [String : Any]]
+//                self.results = searchResults
+//                
+//                DispatchQueue.main.async {
+//                    self.watchList.reloadData()
+//                }
+//            }
+//        }
+//        task.resume()
+//    }
 
     // set number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return watchlist.count
+        return self.results.count
     }
     
     // create new cell
-    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as! MovieCell
         
         // for each cell in tableview, display title, year and poster
-        print(watchlist)
         cell.movieTitle.text = self.results[indexPath.row]["Title"] as! String?
         cell.movieYear.text = self.results[indexPath.row]["Year"] as! String!
         
@@ -72,16 +70,13 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
             
         // Segue to MovieInformation when clicking on cell
-        else if segue.identifier == "showmovieinfo1" {
+        else if segue.identifier == "showmovieinfo2" {
             let path = self.watchList.indexPathForSelectedRow
             let cell = watchList.cellForRow(at: path!) as? MovieCell
             if let viewController = segue.destination as? MovieInformation {
                 
-                viewController.imdbID = cell?.imdbID
-                
-//                if viewController.watchlist.contains(where: {$0[0] == viewController.movieTitle}) == true {
-//                    viewController.addMovie.setTitle("Remove from Watchlist",for: .normal)
-//                }
+                viewController.movie = self.results[path!.row] as? [String : String]
+
             }
         }
     }

@@ -10,14 +10,7 @@ import UIKit
 
 class MovieInformation: UIViewController {
     
-    var watchlist = (UserDefaults.standard.array(forKey: "Movies") as? [[String]]) ?? []
-    
-    var moviePoster: UIImage?
-    var movieTitle: String?
-    var movieYear: String?
-    var movieDescription: String?
-    var imdbID: String?
-    
+    var movie: [String : String]?
 
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UITextView!
@@ -26,74 +19,41 @@ class MovieInformation: UIViewController {
     
     @IBOutlet weak var addMovie: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.update()
-        self.movieInfo()
-    }
-    
-    func movieInfo() {
-    
-
-    let url = URL(string: "https://omdbapi.com/?i=" + imdbID! + "&plot=full")!
-    print(url)
-
-
-    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-        guard let data = data else {
-            return
-        }
-
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-        let searchResults = json as! [String : Any]
-        print(searchResults)
-
-        DispatchQueue.main.async {
-            if let data = NSData(contentsOf: NSURL(string: searchResults["Poster"] as! String) as! URL) {
-                self.moviePoster = UIImage(data: data as Data)
-            }
-
-            self.imdbID = searchResults["ImdbID"] as! String?
-            self.movieTitle = searchResults["Title"] as! String?
-            self.movieYear = searchResults["Year"] as! String?
-            self.movieDescription = searchResults["Description"] as! String?
-        }
-    }
-    task.resume()
     }
 
     func update() {
-        posterImage.image = moviePoster
-        titleLabel.text = movieTitle
-        yearLabel.text = movieYear
-        descriptionText.text = movieDescription
+        self.titleLabel.text = self.movie?["Title"]
+        self.yearLabel.text = self.movie?["Year"]
+        self.descriptionText.text = self.movie?["Plot"]
+        
+        // get movieposter
+        let link = NSURL(string: self.movie?["Poster"] as! String)
+        if let data = NSData(contentsOf: link as! URL) {
+            self.posterImage.image = UIImage(data: data as Data)
+        }
     }
     
     @IBAction func addToWatchlist(_ sender: Any) {
 
         // append movie to watchlist, if added change text to remove intead of add
-        let index = watchlist.index(where: {$0[0] == self.movieTitle!})
+        var watchlist = UserDefaults.standard.array(forKey: "Movies") as? [[String : String]] ?? []
+        let index = watchlist.index(where: {$0 == self.movie!})
         if index == nil {
-            self.watchlist.append([self.movieTitle!])
+            watchlist.append(self.movie!)
             UserDefaults.standard.set(watchlist, forKey: "Movies")
             self.addMovie.setTitle("Remove from Watchlist",for: .normal)
-            reloadInputViews()
             print(watchlist)
         }
         // if movie already is in watchlist, on click add button: remove movie
         else {
-            self.watchlist.remove(at: index!)
+            watchlist.remove(at: index!)
             UserDefaults.standard.set(watchlist, forKey: "Movies")
             self.addMovie.setTitle("Add to Watchlist",for: .normal)
             print(watchlist)
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? ViewController {
-            viewController.watchlist = self.watchlist
         }
     }
 
