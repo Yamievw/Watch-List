@@ -31,7 +31,7 @@
 		6C3759811EA8E22F0028D6C1 /* MovieInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieInformation.swift; sourceTree = "<group>"; };
 		6C3759851EA8E3370028D6C1 /* SearchMovies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMovies.swift; sourceTree = "<group>"; };
 		6C3759871EAA03C90028D6C1 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
-		6CE8550E1EBB415500FA00B8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6CE8550E1EBB415500FA00B8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "YamievanWijnbergen-pset3/README.md"; sourceTree = "<group>"; };
 		6CE855101EBB41A500FA00B8 /* screenshot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot1.png; sourceTree = "<group>"; };
 		6CE855121EBB41AB00FA00B8 /* screenshot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +50,7 @@
 		6C3759551EA638870028D6C1 = {
 			isa = PBXGroup;
 			children = (
+				6CE8550E1EBB415500FA00B8 /* README.md */,
 				6CE855101EBB41A500FA00B8 /* screenshot1.png */,
 				6CE855121EBB41AB00FA00B8 /* screenshot2.png */,
 				6C3759601EA638870028D6C1 /* YamievanWijnbergen-pset3 */,
@@ -72,7 +73,6 @@
 				6C3759631EA638870028D6C1 /* ViewController.swift */,
 				6C3759851EA8E3370028D6C1 /* SearchMovies.swift */,
 				6C3759811EA8E22F0028D6C1 /* MovieInformation.swift */,
-				6CE8550E1EBB415500FA00B8 /* README.md */,
 				6C3759871EAA03C90028D6C1 /* MovieCell.swift */,
 				6C3759651EA638870028D6C1 /* Main.storyboard */,
 				6C3759681EA638870028D6C1 /* Assets.xcassets */,
